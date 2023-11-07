@@ -1,16 +1,32 @@
 from tkinter import *
 import math
 # ---------------------------- CONSTANTS ------------------------------- #
+
+MILK = "#EEEEEE"
+CREAM = "#FFFBF5"
+YELLOW = "#f7f5dd"
 PINK = "#e2979c"
 RED = "#e7305b"
+BLUE = "#068FFF"   # Unknown hex
+OCEAN ="#39A7FF"
+NAVYSEA = "#2B3499"
+ROYALNAVY = "#190482"
+TEAL = "#64CCC5"
+SPRING_GREEN = "#D2DE32"
 GREEN = "#9bdeac"
-YELLOW = "#f7f5dd"
-CREAM = "FFFBF5"
+TREE = "#7A9D54"
+CARROT = "#FF9209"
+LILAC = "#D0A2F7"
 MOIRA = "#7743DB"
-fg = GREEN
+BLACK = "#000000"
+
+fg = TREE
 
 FONT_NAME = "Courier"
-WORK_MIN = 25
+
+# REPS
+reps = 0
+WORK_MIN = 1
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 
@@ -19,8 +35,32 @@ LONG_BREAK_MIN = 20
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
 def start_timer():
+    global reps
+    reps += 1
+    
     count_down(5 * 60)              # 5 mins = 5 * 60
-
+    work_sec = WORK_MIN * 60
+    short_break_sec = SHORT_BREAK_MIN * 60
+    long_break_sec = LONG_BREAK_MIN * 60
+    
+    if reps % 8 == 0:
+        count_down(long_break_sec)
+        title_label.config(text="Long Break", fg=MOIRA)
+    elif reps % 2 == 0:
+        count_down(short_break_sec)
+        title_label.config(text="Break", fg=LILAC)
+    else:
+        count_down(work_sec)
+        title_label.config(text="Focus", fg=OCEAN)
+    
+    # IF 1st, 3rd, 5th, 7th rep: WORK_MIN(25)  [All odd numbers] - valid, but changed.
+    # if reps % 2 != 0 and reps % 8!=0:
+    #     count_down(WORK_MIN)
+    # elif reps % 2 == 0:
+    #     count_down(SHORT_BREAK_MIN)
+    # else:
+    #     count_down(LONG_BREAK_MIN)
+    
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
 
 def count_down(count):
@@ -32,13 +72,15 @@ def count_down(count):
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
         window.after(1000, count_down, count - 1)         # 1000 ms = 1 sec
+    else:
+        start_timer()
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Pomodoro Timer")
 window.config(padx= 150, pady=75, bg=YELLOW)
 
-title_label = Label(text="Timer", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 40))
+title_label = Label(text="Timer", fg=TREE, bg=YELLOW, font=(FONT_NAME, 40))
 title_label.grid(column=1, row=0)
 
 canvas = Canvas(width=205,height=230, bg=YELLOW, highlightthickness=0)        # highlighthickness removes whitelines
