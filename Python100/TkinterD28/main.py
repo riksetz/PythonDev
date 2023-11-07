@@ -7,7 +7,7 @@ CREAM = "#FFFBF5"
 YELLOW = "#f7f5dd"
 PINK = "#e2979c"
 RED = "#e7305b"
-BLUE = "#068FFF"   # Unknown hex
+BLUE = "#068FFF"   
 OCEAN ="#39A7FF"
 NAVYSEA = "#2B3499"
 ROYALNAVY = "#190482"
@@ -19,17 +19,15 @@ CARROT = "#FF9209"
 LILAC = "#D0A2F7"
 MOIRA = "#7743DB"
 BLACK = "#000000"
-
 fg = TREE
 
 FONT_NAME = "Courier"
 
-# REPS
+# GLOBAL
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 reps = 0
-# TIMER
 timer = None
 
 # ---------------------------- TIMER RESET ------------------------------- # 
@@ -48,7 +46,6 @@ def start_timer():
     global reps
     reps += 1
     
-    count_down(5 * 60)              # 5 mins = 5 * 60
     work_sec = WORK_MIN * 60
     short_break_sec = SHORT_BREAK_MIN * 60
     long_break_sec = LONG_BREAK_MIN * 60
@@ -76,7 +73,7 @@ def start_timer():
 def count_down(count):
     count_min = math.floor(count/60)
     count_sec = count % 60
-    if count_sec == 0:            # Dynamic Typing - Able to change data type by overwriting variables. Dynamic change.
+    if count_sec < 10:            # Dynamic Typing - Able to change data type by overwriting variables. Dynamic change.
         count_sec = f"0{count_sec}"
     
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
@@ -105,7 +102,7 @@ tomato_img = PhotoImage(file="tomato.png")
 canvas.create_image(103, 115, image = tomato_img)           # This is the (x, y) values for canvas. Approx Half of H/W.
 timer_text = canvas.create_text(103, 131, text="00:00", fill="white", font=(FONT_NAME, 35, "bold"))        # Font is a tuple value
 canvas.grid(column=1, row=1)
-count_down(5)
+# count_down(5)         # Starting frame
 
 start_button = Button(text="Start", highlightthickness=0, command=start_timer)      # command binds function to button
 start_button.grid(column=0, row=2)
