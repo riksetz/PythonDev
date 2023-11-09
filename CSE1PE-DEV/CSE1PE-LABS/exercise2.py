@@ -36,7 +36,7 @@ def program_nocutter():
             break
         except ValueError:
             print("\nInvalid input. Please enter a valid number.")
-    
+     
 def main():
     while True:
         print("\nWelcome to the Equal Pizza Divider Program!\n")

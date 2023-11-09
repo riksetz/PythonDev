@@ -6,7 +6,7 @@ MILK = "#EEEEEE"
 CREAM = "#FFFBF5"
 YELLOW = "#f7f5dd"
 PINK = "#e2979c"
-RED = "#e7305b"
+RED = "#e7305b"                                                                             
 BLUE = "#068FFF"   
 OCEAN ="#39A7FF"
 NAVYSEA = "#2B3499"
@@ -24,9 +24,9 @@ fg = TREE
 FONT_NAME = "Courier"
 
 # GLOBAL
-WORK_MIN = 25
-SHORT_BREAK_MIN = 5
-LONG_BREAK_MIN = 20
+WORK_MIN = 10
+SHORT_BREAK_MIN = 2
+LONG_BREAK_MIN = 10
 reps = 0
 timer = None
 
